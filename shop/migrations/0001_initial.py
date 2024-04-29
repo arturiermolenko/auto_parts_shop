@@ -7,25 +7,32 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Items',
+            name="Items",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('number', models.CharField(max_length=6, unique=True)),
-                ('description', models.TextField()),
-                ('materials', models.CharField(max_length=255)),
-                ('quantity', models.IntegerField()),
-                ('costs_prise', models.DecimalField(decimal_places=2, max_digits=16)),
-                ('sell_price', models.DecimalField(decimal_places=2, max_digits=16)),
-                ('link_where_buy', models.TextField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("number", models.CharField(max_length=6, unique=True)),
+                ("description", models.TextField()),
+                ("materials", models.CharField(max_length=255)),
+                ("quantity", models.IntegerField()),
+                ("costs_prise", models.DecimalField(decimal_places=2, max_digits=16)),
+                ("sell_price", models.DecimalField(decimal_places=2, max_digits=16)),
+                ("link_where_buy", models.TextField()),
             ],
             options={
-                'ordering': ['number'],
+                "ordering": ["number"],
             },
         ),
     ]

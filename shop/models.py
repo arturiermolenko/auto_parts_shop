@@ -58,6 +58,4 @@ def item_image_file_path(instance, filename) -> str:
 
 class ItemImage(models.Model):
     image = models.ImageField(upload_to=item_image_file_path)
-    item = models.ForeignKey(
-        "Item", on_delete=models.CASCADE, related_name="images"
-    )
+    item = models.ForeignKey("Item", on_delete=models.CASCADE, related_name="images")
