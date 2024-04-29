@@ -1,5 +1,5 @@
 import os.path
-import uuid 
+import uuid
 
 from django.db import models
 from django.utils.text import slugify
@@ -13,6 +13,7 @@ def file_path(instance, filename, suffix, folder) -> str:
 
 def category_image_file_path(instance, filename) -> str:
     return file_path(instance, filename, instance.name, "categories")
+
 
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -29,6 +30,7 @@ class Category(models.Model):
 def item_main_image_file_path(instance, filename) -> str:
     return file_path(instance, filename, f"main_{instance.name}", "items")
 
+
 class Item(models.Model):
     name = models.CharField(max_length=255)
     number = models.CharField(max_length=6, unique=True)
@@ -40,7 +42,7 @@ class Item(models.Model):
     link_where_buy = models.TextField()
     main_image = models.ImageField(upload_to=item_main_image_file_path)
     category = models.ForeignKey(
-        "Category", on_delete=models.CASCADE, related_name="caategory"
+        "Category", on_delete=models.CASCADE, related_name="category"
     )
 
     class Meta:
@@ -48,13 +50,12 @@ class Item(models.Model):
 
     def __str__(self):
         return f"{self.number} {self.name}"
- 
+
 
 def item_image_file_path(instance, filename) -> str:
     return file_path(instance, filename, instance.item.name, "items")
 
+
 class ItemImage(models.Model):
     image = models.ImageField(upload_to=item_image_file_path)
-    item = models.ForeignKey(
-        "Item", on_delete=models.CASCADE, related_name="images"
-    )   
+    item = models.ForeignKey("Item", on_delete=models.CASCADE, related_name="images")
