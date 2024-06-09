@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block header %} <title>{{ category.name }}</title> {% endblock %}
+
+{% block content %}
+    {% if items %}
+        {% for item in items %}
+            <a href="/{{ category.name }}/{{ item.slug }}/">{{ item.name }}</a>
+        {% endfor %}
+    {% endif %}
+    <a href="/categories/">Back to Categories</a>
+{% endblock %}
+
