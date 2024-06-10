@@ -42,14 +42,20 @@ class Item(models.Model):
     link_where_buy = models.TextField()
     main_image = models.ImageField(upload_to=item_main_image_file_path)
     category = models.ForeignKey(
-        "Category", on_delete=models.CASCADE, related_name="category"
+        "Category", on_delete=models.CASCADE, related_name="items"
     )
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
 
     class Meta:
         ordering = ["number"]
 
     def __str__(self):
-        return f"{self.number} {self.name}"
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(f"{self.name}-{self.number}")
+        super().save(*args, **kwargs)
 
 
 def item_image_file_path(instance, filename) -> str:

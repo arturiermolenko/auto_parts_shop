@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+{% block header %} <title>{{ item.name }}</title> {% endblock %}
+
+{% block content %}
+    {% if item %}
+        {{item.name}}
+    {% endif %}
+    <a href="/categories/">Back to Categories</a>
+{% endblock %}
